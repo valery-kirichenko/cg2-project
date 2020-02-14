@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/vue,vuejs,macos,flask,python,node
-# Edit at https://www.gitignore.io/?templates=vue,vuejs,macos,flask,python,node
+# Created by https://www.gitignore.io/api/vue,vuejs,macos,flask,python,node,virtualenv
+# Edit at https://www.gitignore.io/?templates=vue,vuejs,macos,flask,python,node,virtualenv
 
 ### Flask ###
 instance/*
@@ -291,6 +291,18 @@ temp/
 
 # Pyre type checker
 
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+pyvenv.cfg
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-selfcheck.json
+
 ### Vue ###
 .DS_*
 **/*.backup.*
@@ -310,4 +322,4 @@ sketch
 npm-debug.log
 yarn-error.log
 
-# End of https://www.gitignore.io/api/vue,vuejs,macos,flask,python,node
+# End of https://www.gitignore.io/api/vue,vuejs,macos,flask,python,node,virtualenv
