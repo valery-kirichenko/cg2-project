@@ -14,10 +14,5 @@ class Beeper(Resource):
         beep = Beep(text=args['text'], username=get_jwt_identity())
         beep.save()
 
-        s = Beep.search()
-        for hit in s.scan():
-            print(hit.date)
-
-
         return {'message': 'ok', 'beep_id': beep.meta.id}
 
