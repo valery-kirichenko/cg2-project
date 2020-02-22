@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from elasticsearch_dsl import *
+
 from .models.beep import Beep
 
 
@@ -14,5 +14,5 @@ class Beeper(Resource):
         beep = Beep(text=args['text'], username=get_jwt_identity())
         beep.save()
 
-        return {'message': 'ok', 'beep_id': beep.meta.id}
+        return {'msg': 'ok', 'beep_id': beep.meta.id}
 

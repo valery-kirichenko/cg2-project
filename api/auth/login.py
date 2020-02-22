@@ -15,8 +15,8 @@ class Login(Resource):
 
         r = User.find_users(args['username'])
         if r.hits.total.value == 0:
-            return {'message': 'User not found'}, 401
+            return {'msg': 'User not found'}, 401
         user = r.hits[0]
         if not user.verify_password(args['password']):
-            return {'message': 'Wrong password'}, 401
-        return {'message': 'ok', 'token': create_access_token(identity=args['username'])}
+            return {'msg': 'Wrong password'}, 401
+        return {'msg': 'ok', 'token': create_access_token(identity=args['username'])}
