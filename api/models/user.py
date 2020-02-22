@@ -20,14 +20,14 @@ class User(Document):
         return hasher.verify(self.hashed_password, password)
 
     @classmethod
-    def find_users(cls, username):
+    def find_by_field(cls, field, value):
         s = cls.search()
-        s = s.query('match', username=username)
+        s = s.query('match', **{field: value})
         r = s.execute()
         return r
 
     def save(self, **kwargs):
-        r = self.find_users(self.username)
+        r = self.find_by_field('username', self.username)
         if r.hits.total.value > 0 and 'id' not in self.meta:
             raise ValueError('User already exists')
 

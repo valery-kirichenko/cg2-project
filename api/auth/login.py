@@ -13,7 +13,7 @@ class Login(Resource):
     def post(self):
         args = parser.parse_args()
 
-        r = User.find_users(args['username'])
+        r = User.find_by_field('username', args['username'])
         if r.hits.total.value == 0:
             return {'msg': 'User not found'}, 401
         user = r.hits[0]

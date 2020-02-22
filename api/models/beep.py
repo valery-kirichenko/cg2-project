@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from elasticsearch_dsl import Document, Text, Search, Q, Date
+from elasticsearch_dsl import Document, Text, Date
 
 
 class Beep(Document):
@@ -10,6 +10,13 @@ class Beep(Document):
 
     class Index:
         name = 'beeps'
+
+    @classmethod
+    def find_by_field(cls, field, value):
+        s = cls.search()
+        s = s.query('match', **{field: value})
+        r = s.execute()
+        return r
 
     def save(self, **kwargs):
         # a dirty hack to get UTC+0 time from whatever timezone is set on the server
