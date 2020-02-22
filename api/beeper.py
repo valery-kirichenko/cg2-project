@@ -16,3 +16,8 @@ class Beeper(Resource):
 
         return {'msg': 'ok', 'beep_id': beep.meta.id}
 
+
+class BeeperById(Resource):
+    def get(self, beep_id):
+        beep = Beep.get(id=beep_id)
+        return {'text': beep.text, 'date': str(beep.date)}

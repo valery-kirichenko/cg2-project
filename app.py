@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
@@ -6,7 +6,7 @@ from elasticsearch_dsl import connections
 
 from api.auth.register import Register
 from api.auth.login import Login
-from api.beeper import Beeper
+from api.beeper import Beeper, BeeperById
 
 
 app = Flask(__name__)
@@ -19,6 +19,7 @@ api = Api(app)
 api.add_resource(Register, '/api/auth/register')
 api.add_resource(Login, '/api/auth/login')
 api.add_resource(Beeper, '/api/beep')
+api.add_resource(BeeperById, '/api/beep/<beep_id>')
 
 # enable CORS
 CORS(app, resources={r'/api/*': {'origins': '*'}})
