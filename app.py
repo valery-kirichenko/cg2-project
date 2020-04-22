@@ -7,6 +7,7 @@ from elasticsearch_dsl import connections
 from api.auth.register import Register
 from api.auth.login import Login
 from api.beeper import Beeper, BeeperById
+from api.follow import Follow
 
 
 app = Flask(__name__)
@@ -20,6 +21,7 @@ api.add_resource(Register, '/api/auth/register')
 api.add_resource(Login, '/api/auth/login')
 api.add_resource(Beeper, '/api/beep')
 api.add_resource(BeeperById, '/api/beep/<beep_id>')
+api.add_resource(Follow, '/api/follow')
 
 # enable CORS
 CORS(app, resources={r'/api/*': {'origins': '*'}})
@@ -29,9 +31,11 @@ CORS(app, resources={r'/api/*': {'origins': '*'}})
 def migrate():
     from api.models.user import User
     from api.models.beep import Beep
+    from api.models.following import Following
 
     User.init()
     Beep.init()
+    Following.init()
 
 
 if __name__ == '__main__':
