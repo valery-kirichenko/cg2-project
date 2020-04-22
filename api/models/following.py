@@ -20,7 +20,7 @@ class Following(Document):
         r1 = User.find_by_field('username', self.user_to)
         r2 = User.find_by_field('username', self.user_from)
         if r1.hits.total.value == 0 or r2.hits.total.value == 0:
-            raise ValueError('User(s) does not exist')
+            raise ValueError('User does not exist')
         if self.user_from == self.user_to:
             raise ValueError('User cannot follow himself')
         if self.is_following(self.user_from, self.user_to):
