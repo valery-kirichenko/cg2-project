@@ -1,3 +1,4 @@
+from elasticsearch import NotFoundError
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -19,5 +20,8 @@ class Beeper(Resource):
 
 class BeeperById(Resource):
     def get(self, beep_id):
-        beep = Beep.get(id=beep_id)
-        return {'text': beep.text, 'date': str(beep.date)}
+        try:
+            beep = Beep.get(id=beep_id)
+            return {'text': beep.text, 'date': str(beep.date), 'username': beep.username}
+        except NotFoundError:
+            return {'msg': 'not found'}, 404

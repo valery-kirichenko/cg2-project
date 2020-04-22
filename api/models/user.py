@@ -1,6 +1,6 @@
 from elasticsearch_dsl import Document, Integer, Text
 from argon2 import PasswordHasher
-
+from argon2.exceptions import VerificationError
 
 hasher = PasswordHasher()
 
@@ -17,7 +17,11 @@ class User(Document):
         self.hashed_password = hasher.hash(password)
 
     def verify_password(self, password):
-        return hasher.verify(self.hashed_password, password)
+        try:
+            hasher.verify(self.hashed_password, password)
+            return True
+        except VerificationError:
+            return False
 
     @classmethod
     def find_by_field(cls, field, value):
