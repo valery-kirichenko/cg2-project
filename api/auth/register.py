@@ -15,7 +15,7 @@ class Register(Resource):
         user = User(username=args['username'], access_level=0x01)
         user.hash_password(args['password'])
         try:
-            user.save()
+            user.save(refresh=True)
             return {'msg': 'ok'}
         except ValueError as e:
             return {'msg': str(e)}, 422
