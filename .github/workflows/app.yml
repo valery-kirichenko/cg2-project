@@ -22,7 +22,7 @@ jobs:
         sudo sysctl -w vm.swappiness=1
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
-    - name: Runs Elasticsearch
+    - name: Run Elasticsearch
       uses: elastic/elastic-github-actions/elasticsearch@master
       with:
         stack-version: 7.6.2
@@ -34,6 +34,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Create Elastic indices
+      run: |
+        python -m flask migrate
     - name: Test
       run: |
         coverage run tests.py
