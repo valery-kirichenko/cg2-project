@@ -49,13 +49,15 @@ class MyTestCase(unittest.TestCase):
         beep_response = self.app.post('/api/beep', json={'text': 'Test beep'},
                                       headers={'Authorization': f'Bearer {login_response.json["token"]}'})
         self.assertEqual(200, beep_response.status_code)
+        return beep_response
 
     def test_nonexistent_beep(self):
         response = self.app.get('/api/beep/nonexistentid')
         self.assertEqual(404, response.status_code)
 
     def test_retrieve(self):
-        response = self.app.get('/api/beep/Q_sDqHEBT_Z5AmdRcKWd')
+        beep_response = self.test_beep()
+        response = self.app.get(f'/api/beep/{beep_response.json["beep_id"]}')
         self.assertEqual(200, response.status_code)
 
 
