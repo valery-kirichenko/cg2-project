@@ -13,15 +13,15 @@ class MyTestCase(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         s = User.search()
-        resp = s.query('match', username='unittest1').delete()
-        print(resp)
+        s.query('match', username='unittest1').delete()
         s.query('match', username='unittest2').delete()
         s.query('match', username='unittest3').delete()
+        s.query('match', username='unittest4').delete()
+        s.query('match', username='unittest6').delete()
 
     def test_register(self):
         response = self.app.post('/api/auth/register', json={'username': 'unittest1', 'password': '123456'})
         Index('users').flush()
-        print(response.json)
         self.assertEqual(200, response.status_code)
 
     def test_repeated_register(self):
