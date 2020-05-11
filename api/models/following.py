@@ -16,6 +16,11 @@ class Following(Document):
         r = s.execute()
         return r.hits.total.value > 0
 
+    @classmethod
+    def get_followings(cls, username):
+        s = cls.search().query('match', user_from=username)
+        return [hit.user_to for hit in s.scan()]
+
     def save(self, **kwargs):
         r1 = User.find_by_field('username', self.user_to)
         r2 = User.find_by_field('username', self.user_from)

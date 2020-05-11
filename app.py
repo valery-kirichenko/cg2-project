@@ -8,6 +8,7 @@ from api.auth.register import Register
 from api.auth.login import Login
 from api.beeper import Beeper, BeeperById
 from api.follow import Follow
+from api.feed import GeneralFeed, PersonalFeed, UsersFeed
 
 
 app = Flask(__name__)
@@ -22,6 +23,9 @@ api.add_resource(Login, '/api/auth/login')
 api.add_resource(Beeper, '/api/beep')
 api.add_resource(BeeperById, '/api/beep/<beep_id>')
 api.add_resource(Follow, '/api/follow')
+api.add_resource(GeneralFeed, '/api/feed/all')
+api.add_resource(PersonalFeed, '/api/feed/')
+api.add_resource(UsersFeed, '/api/feed/<username>')
 
 # enable CORS
 CORS(app, resources={r'/api/*': {'origins': '*'}})
@@ -40,4 +44,3 @@ def migrate():
 
 if __name__ == '__main__':
     app.run()
-
