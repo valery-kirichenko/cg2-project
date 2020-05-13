@@ -21,6 +21,13 @@ class Following(Document):
         s = cls.search().query('match', user_from=username)
         return [hit.user_to for hit in s.scan()]
 
+    @classmethod
+    def find(cls, user_from, user_to):
+        s = cls.search()
+        s = s.query(Q('bool', must=[Q('match', user_to=user_to), Q('match', user_from=user_from)]))
+        r = s.execute()
+        return r
+
     def save(self, **kwargs):
         r1 = User.find_by_field('username', self.user_to)
         r2 = User.find_by_field('username', self.user_from)
