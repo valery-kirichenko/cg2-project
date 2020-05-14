@@ -12,6 +12,6 @@ class BeepSearch(Resource):
         if len(text) < 2:
             return {'msg': 'Too short text for search'}, 422
 
-        s = Beep.search().query('match', text=text)
+        s = Beep.search().query('match', text=text).source(['*'])
         r = s.execute()
-        return [hit.meta.id for hit in r]
+        return [{'text': hit.text, 'date': str(hit.date), 'username': hit.username} for hit in r]
