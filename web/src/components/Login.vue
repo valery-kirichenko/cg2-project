@@ -17,21 +17,21 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: ''
-      }
-    },
-    methods: {
-      login: function () {
-        const username = this.username
-        const password = this.password
-        this.$store.dispatch('login', {username, password})
-          .then(() => this.$router.push('/'))
-          .catch(err => console.log(err))
-      }
+export default {
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login: function () {
+      const username = this.username
+      const password = this.password
+      this.$store.dispatch('login', { username, password })
+        .then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
     }
   }
+}
 </script>

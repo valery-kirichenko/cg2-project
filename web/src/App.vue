@@ -43,24 +43,24 @@
 </style>
 
 <script>
-  import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
-  export default {
-    computed: {
-      isLoggedIn: function () {
-        return this.$store.getters.isLoggedIn
-      },
-      username: function () {
-        return jwtDecode(this.$store.state.token).identity
-      }
+export default {
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn
     },
-    methods: {
-      logout: function () {
-        this.$store.dispatch('logout')
-          .then(() => {
-            this.$router.push('/login')
-          })
-      }
+    username: function () {
+      return jwtDecode(this.$store.state.token).identity
+    }
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
     }
   }
+}
 </script>

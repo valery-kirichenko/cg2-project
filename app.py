@@ -9,7 +9,7 @@ from api.auth.login import Login
 from api.beeper import Beeper, BeeperById
 from api.follow import Follow
 from api.feed import GeneralFeed, PersonalFeed, UsersFeed
-from api.search import BeepSearch
+from api.search import BeepSearch, Suggestion
 from web.web import ui
 
 app = Flask(__name__, static_folder=None)
@@ -28,6 +28,7 @@ api.add_resource(GeneralFeed, '/api/feed/all')
 api.add_resource(PersonalFeed, '/api/feed/')
 api.add_resource(UsersFeed, '/api/feed/<username>')
 api.add_resource(BeepSearch, '/api/search/beep')
+api.add_resource(Suggestion, '/api/search/suggest')
 
 # enable CORS
 CORS(app, resources={r'/api/*': {'origins': '*'}})

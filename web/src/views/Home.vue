@@ -3,12 +3,12 @@
 </template>
 
 <script>
-  import Feed from '../components/Feed.vue'
+import Feed from '../components/Feed.vue'
 
-  export default {
-    name: 'Home',
-    components: {
-      Feed
-    }
+export default {
+  name: 'Home',
+  components: {
+    Feed
   }
+}
 </script>

@@ -18,23 +18,23 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: ''
+export default {
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    register: function () {
+      const data = {
+        username: this.username,
+        password: this.password
       }
-    },
-    methods: {
-      register: function () {
-        const data = {
-          username: this.username,
-          password: this.password
-        }
-        this.$store.dispatch('register', data)
-          .then(() => this.$router.push('/login'))
-          .catch(err => console.log(err))
-      }
+      this.$store.dispatch('register', data)
+        .then(() => this.$router.push('/login'))
+        .catch(err => console.log(err))
     }
   }
+}
 </script>

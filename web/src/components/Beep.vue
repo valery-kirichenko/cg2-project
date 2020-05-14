@@ -9,10 +9,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'Beep',
-    props: ['text', 'username', 'date']
-  }
+export default {
+  name: 'Beep',
+  props: ['text', 'username', 'date']
+}
 </script>
 
 <style scoped>

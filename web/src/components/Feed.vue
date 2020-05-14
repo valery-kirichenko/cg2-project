@@ -15,41 +15,41 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import axios from 'axios'
-  import Beep from '../components/Beep.vue'
+// @ is an alias to /src
+import axios from 'axios'
+import Beep from '../components/Beep.vue'
 
-  export default {
-    name: 'Home',
-    props: ['url', 'config'],
-    data() {
-      return {
-        beeps: null,
-        offset: 0
-      }
-    },
-    created() {
+export default {
+  name: 'Home',
+  props: ['url', 'config'],
+  data () {
+    return {
+      beeps: null,
+      offset: 0
+    }
+  },
+  created () {
+    this.update()
+  },
+  methods: {
+    next () {
+      this.offset += 10
       this.update()
     },
-    methods: {
-      next() {
-        this.offset += 10
-        this.update()
-      },
-      prev() {
-        this.offset -= 10
-        this.update()
-      },
-      update() {
-        axios.get('/feed/' + this.url + '?offset=' + this.offset, this.config)
-          .then(resp => {
-            this.beeps = resp.data.beeps
-          })
-          .catch(e => console.error(e))
-      }
+    prev () {
+      this.offset -= 10
+      this.update()
     },
-    components: {
-      Beep
+    update () {
+      axios.get('/feed/' + this.url + '?offset=' + this.offset, this.config)
+        .then(resp => {
+          this.beeps = resp.data.beeps
+        })
+        .catch(e => console.error(e))
     }
+  },
+  components: {
+    Beep
   }
+}
 </script>

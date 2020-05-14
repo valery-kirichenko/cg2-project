@@ -11,22 +11,22 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  export default {
-    name: 'SendBeep',
-    data() {
-      return {
-        text: ''
-      }
-    },
-    methods: {
-      send() {
-        const text = this.text
-        axios.post('/beep', {text: text}, {headers: {Authorization: 'Bearer ' + this.$store.state.token}})
-          .then(() => this.$router.push('/'))
-          .catch(err => console.log(err))
-      }
+export default {
+  name: 'SendBeep',
+  data () {
+    return {
+      text: ''
+    }
+  },
+  methods: {
+    send () {
+      const text = this.text
+      axios.post('/beep', { text: text }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+        .then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
     }
   }
+}
 </script>

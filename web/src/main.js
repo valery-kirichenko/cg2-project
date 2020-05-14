@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 
 Vue.use(Vuex)
-axios.defaults.baseURL = '/api/'
+axios.defaults.baseURL = 'http://localhost:5000/api/'
 
 new Vue({
   router,

@@ -11,24 +11,24 @@ export default new Vuex.Store({
     user: {}
   },
   mutations: {
-    auth_request(state) {
+    auth_request (state) {
       state.status = 'loading'
     },
-    auth_success(state, token, user) {
+    auth_success (state, token, user) {
       state.status = 'success'
       state.token = token
       state.user = user
     },
-    auth_error(state) {
+    auth_error (state) {
       state.status = 'error'
     },
-    logout(state) {
+    logout (state) {
       state.status = ''
       state.token = ''
     }
   },
   actions: {
-    login({commit}, user) {
+    login ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios.post('/auth/login', user)
@@ -46,7 +46,7 @@ export default new Vuex.Store({
           })
       })
     },
-    register({commit}, user) {
+    register ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios.post('/auth/register', user)
@@ -58,8 +58,9 @@ export default new Vuex.Store({
           })
       })
     },
-    logout({commit}) {
-      return new Promise((resolve, _) => {
+    logout ({ commit }) {
+      // noinspection JSUnusedLocalSymbols
+      return new Promise((resolve, reject) => {
         commit('logout')
         localStorage.removeItem('token')
         delete axios.defaults.headers.common.Authorization
