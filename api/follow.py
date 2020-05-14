@@ -1,3 +1,4 @@
+from flask import request
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -39,3 +40,11 @@ class Follow(Resource):
             following.delete()
 
         return {'msg': 'ok'}
+
+    @jwt_required
+    def get(self):
+        username = request.args.get('username')
+        if username is None:
+            return {'msg': 'Username parameter is required to perform this action'}, 400
+
+        return {'msg': 'ok', 'is_following': Following.is_following(get_jwt_identity(), username)}
