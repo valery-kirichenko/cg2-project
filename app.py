@@ -10,8 +10,9 @@ from api.beeper import Beeper, BeeperById
 from api.follow import Follow
 from api.feed import GeneralFeed, PersonalFeed, UsersFeed
 from api.search import BeepSearch
+from web.web import ui
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 app.config.from_pyfile('config.py')
 jwt = JWTManager(app)
 
@@ -30,6 +31,8 @@ api.add_resource(BeepSearch, '/api/search/beep')
 
 # enable CORS
 CORS(app, resources={r'/api/*': {'origins': '*'}})
+
+app.register_blueprint(ui)
 
 
 @app.cli.command("migrate")

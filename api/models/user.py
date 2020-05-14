@@ -35,4 +35,7 @@ class User(Document):
         if r.hits.total.value > 0 and 'id' not in self.meta:
             raise ValueError('User already exists')
 
+        if len(str(self.username)) < 4:
+            raise ValueError('Username can\'t be shorter than 4 characters')
+
         return super(User, self).save(**kwargs)
